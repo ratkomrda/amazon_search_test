@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Suite]" parallel="tests">
+  <parameter name="jobName" value="Amazon Search Test IE"/>
+  <parameter name="browser" value="Internet Explorer"/>
+  <parameter name="version" value="11.103"/>
+  <parameter name="platform" value="Windows 10"/>
+  <test name="Amazon_Search_Test CR(failed)" parallel="tests">
+    <parameter name="jobName" value="Amazon Search Test CR"/>
+    <parameter name="browser" value="Chrome"/>
+    <parameter name="version" value="36"/>
+    <parameter name="platform" value="Windows"/>
+    <classes>
+      <class name="testSuite.AmazonTest">
+        <methods>
+          <include name="amazonSearchTest"/>
+          <include name="afterTest"/>
+          <include name="afterTest"/>
+          <include name="afterTest"/>
+          <include name="beforeTest"/>
+          <include name="beforeTest"/>
+          <include name="beforeTest"/>
+        </methods>
+      </class> <!-- testSuite.AmazonTest -->
+    </classes>
+  </test> <!-- Amazon_Search_Test CR(failed) -->
+</suite> <!-- Failed suite [Suite] -->
