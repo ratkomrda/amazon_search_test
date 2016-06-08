@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
@@ -22,10 +23,11 @@ import com.saucelabs.testng.SauceOnDemandTestListener;
 
 @Listeners({ SauceOnDemandTestListener.class })
 public class BaseTest implements SauceOnDemandSessionIdProvider, SauceOnDemandAuthenticationProvider{
+	
 	protected ThreadLocal<WebDriver> driver= new ThreadLocal<WebDriver>();
 	
 	SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication(System.getenv("usrname"), System.getenv("accesskey"));
-
+	
 	public WebDriver getDriver() {
 		return  driver.get();
 	}
@@ -43,7 +45,7 @@ public class BaseTest implements SauceOnDemandSessionIdProvider, SauceOnDemandAu
 			capability.setCapability(CapabilityType.PLATFORM, platform);
 		if (jobName != null)
 			capability.setCapability("name", jobName);
-		
+		//Use your own sauce user name and API access key
 		driver.set(new RemoteWebDriver(new URL("http://"+System.getenv("usrname")+":"+System.getenv("accesskey")+"@ondemand.saucelabs.com:80/wd/hub"), capability));
 		driver.get().navigate().to("http://www.amazon.com");
 		driver.get().manage().window().maximize();
