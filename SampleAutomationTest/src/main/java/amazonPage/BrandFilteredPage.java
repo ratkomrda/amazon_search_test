@@ -3,18 +3,20 @@ package amazonPage;
 import java.util.List;
 
 import org.openqa.selenium.By;
-
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import testSuite.BaseTest;
 
-public class BrandFilteredPage{
+public class BrandFilteredPage {
 	
 	// Define Brand Filtered Page result list
-	@FindBy(how = How.XPATH, using = "//ul[@id='s-results-list-atf']/li//div[@class='a-row a-spacing-mini']")
+	@FindBy(how = How.XPATH, using = "//ul[@id='s-results-list-atf']/li//div[@class='a-row a-spacing-none']/a")
 	private List<WebElement> brandPageItemList;
 	
 	// Define Product Page description
@@ -26,25 +28,28 @@ public class BrandFilteredPage{
 	// brand page list
 	public boolean VerifySeachCriteriaIsDisplayedInFilteredBrandPage() throws Exception {
 		
-		int count = 0;
-
+		
+		 int count=0;
 		for (WebElement we : brandPageItemList) {
-		System.out.println("THE TEXT IN THE first list tab ::: "+ we.getText());
+		
 			if (we.getText().contains("Nine West"))
 			{
+				
 				count++;
 				break;
 			}
+			
 		}
-
-		if (count > 0) {
+		if (count > 0) 
+		{
 			System.out.println("criteria was found in the search result");
 			return true;
-		} else {
-			System.out.println("criteria was not found in the search result");
-			return false;
 		}
-
+			else {
+				System.out.println("criteria was not found in the search result");
+				return false;
+			} 
+	
 	}
 	
 	
@@ -59,7 +64,8 @@ public class BrandFilteredPage{
 		{
 			we.click();
 			//Wait until the page loads...
-			//waitForVisibilityOfElement(productDescription, "The product page did not appear after clicking the item", 10);
+			 // implicit wait - to wait for 5seconds  for the productDescription button to be click-able
+			Thread.sleep(5000);
 			Assert.assertTrue(productDescription.isDisplayed());
 				value = true;
 				System.out.println("Product Page was correctly loaded");
